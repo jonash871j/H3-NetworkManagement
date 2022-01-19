@@ -12,17 +12,11 @@ class SshConnection:
 
     def authorize(self):
         self.connection = netmiko.Netmiko(**self.device)
+        self.connection.enable()
 
     def sendCommand(self, command):
         return self.connection.send_command(command)
     
-    def gotoPrivilegedExec(self):
-        self.connection.enable()
-
-    def gotoConfig(self):
-        self.gotoPrivilegedExec()
-        self.connection.config_mode()
-
-    def gotoInterface(self, interface):
-        self.gotoConfig()
-        self.sendCommand('interface ' + interface)
+    def sendConfigCommand(self, command):
+        return self.connection.send_config_set(command)
+       
