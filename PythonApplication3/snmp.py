@@ -19,15 +19,33 @@ class SnmpConnection:
             hlapi.CommunityData(self.community),
             hlapi.UdpTransportTarget((self.ip, self.port)),
             context,
-            *self.construct_object_types(oids)
+            *self.constructObjectTypes(oids)
+        )
+        data = self.fetch(handler, 1)[0]
+        for k, v in data.items():
+           return v
+
+    def set(self, value_pairs, engine=hlapi.SnmpEngine(), context=hlapi.ContextData()):
+        handler = hlapi.setCmd(
+            engine,
+            hlapi.CommunityData(self.community),
+            hlapi.UdpTransportTarget((self.ip, self.port)),
+            context,
+            *self.construct_value_pairs(value_pairs)
         )
         return self.fetch(handler, 1)[0]
 
-    def construct_object_types(self, list_of_oids):
+    def constructObjectTypes(self, list_of_oids):
         object_types = []
         for oid in list_of_oids:
             object_types.append(hlapi.ObjectType(hlapi.ObjectIdentity(oid)))
         return object_types
+
+    def construct_value_pairs(self, list_of_pairs):
+        pairs = []
+        for k, v in list_of_pairs.items():
+            pairs.append(hlapi.ObjectType(hlapi.ObjectIdentity(k), v))
+        return pairs
 
     def fetch(self, handler, count):
         result = []

@@ -22,10 +22,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="graph.py" />
+    <Compile Include="gui\graph_window.py" />
     <Compile Include="main.py" />
+    <Compile Include="oid.py" />
     <Compile Include="ssh.py" />
     <Compile Include="snmp.py" />
+    <Compile Include="gui\console_view.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="gui\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
