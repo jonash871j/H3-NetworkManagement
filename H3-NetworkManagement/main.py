@@ -2,8 +2,8 @@ import threading
 import time
 from ssh import SshConnection
 from snmp import SnmpConnection
-from gui.console_view import ConsoleView
-from gui.graph_window import GraphWindow
+from console_view import ConsoleView
+from graph_window import GraphWindow
 
 def main():
     sshConnection = SshConnection('192.168.1.1', 'admin', 'cisco', 'cisco')
